@@ -1,9 +1,11 @@
+require('dotenv').config();
+
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const axios = require('axios');
 
-const TOKEN = 'MTExMzM4NTc1NzM5NTEzNjU5Mg.GxbZsn.j9DOlEahm0Rx4T_TN8AFkBRCIL2rAGoMnpEXUs';
-const CHATGPT_API_KEY = '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';
+const TOKEN = process.env.TOKEN;
+const CHATGPT_API_KEY = process.env.CHATGPT_API_KEY;
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);

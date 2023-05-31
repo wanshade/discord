@@ -1,7 +1,8 @@
 require('dotenv').config();
 
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Intents } = require('discord.js');
+const client = new Discord.Client({ intents: [Intents.FLAGS.GUILD_MESSAGES] });
 const axios = require('axios');
 
 const TOKEN = process.env.TOKEN;
@@ -11,7 +12,7 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
 });
 
-client.on('message', async (message) => {
+client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
   if (message.content === '!hello') {
     message.reply('Hello!');
@@ -33,12 +34,3 @@ client.on('message', async (message) => {
           },
         }
       );
-      const reply = response.data.choices[0].message.content;
-      message.reply(reply);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }
-});
-
-client.login(TOKEN);
